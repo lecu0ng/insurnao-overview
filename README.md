@@ -2,7 +2,7 @@
 
 # Insurnao
 
-**A licensed insurance agency performing brokerage services, powered by AI, for Vietnam: travel and health insurance today (property and vehicle coming soon).**
+**A licensed insurance agency performing brokerage services (VSIC 6622), powered by AI, for Vietnam: travel and health insurance today (property and vehicle coming soon).**
 
 Needs analysis, cross-carrier comparison, the carrier's own application form and e-signature in one bilingual journey, guided by **Iris**, an AI assistant that explains cover in plain language, cites its sources and never sets a price.
 
@@ -31,7 +31,7 @@ Needs analysis, cross-carrier comparison, the carrier's own application form and
 | Advantage | What it means in practice |
 | --- | --- |
 | **AI where it helps, determinism where it matters** | Iris explains, retrieves and cites. A deterministic engine produces every price and every recommendation, with a recorded decision log. The model never gets the final say. |
-| **Agency model** | Insurnao is a licensed insurance agency performing brokerage services. Carriers underwrite, price and bind; Insurnao carries no underwriting risk and focuses on distribution, advice and service. |
+| **Agency model** | Insurnao is a licensed insurance agency performing brokerage services (VSIC 6622). Carriers underwrite, price and bind; Insurnao carries no underwriting risk and focuses on distribution, advice and service. |
 | **Data residency by design** | The full platform runs on GreenNode (VNG Cloud) in Ho Chi Minh City. Personal data is stored and processed in Vietnam, aligned with the Personal Data Protection Law (Law 91/2025/QH15) and Decree 356/2025. |
 | **Carrier data as an asset** | Rates and benefits are transcribed verbatim from dated carrier documents and verified against carriers' own calculators. Adding a carrier is data work, not a rewrite. |
 | **A learning loop that stays in Vietnam** | First-party, consent-based analytics record what was recommended and what customers chose, building the training data for an ML recommender without any third-party analytics service. |
