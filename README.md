@@ -42,10 +42,12 @@ Needs analysis, cross-carrier comparison, the carrier's own application form and
 
 | Line of business | Status | Carriers |
 | --- | --- | --- |
-| Travel | **Live**: quote, compare, apply, e-sign, track | PVI, BIC, PTI, PJICO, Liberty, Pacific Cross International |
-| Health | **Live**: international and local plans, family quotes | Pacific Cross International, Allianz Care, April (via PVI), Liberty, PVI, BIC, PTI |
+| Travel | **Live**: quote, compare, apply, e-sign, track (single trip and annual, domestic and international) | PVI, BIC, PTI, PJICO, Liberty, Pacific Cross International |
+| Health | **Live**: quote, compare, apply, e-sign, track (international and local plans, individuals and families) | Pacific Cross International, Allianz Care, April (via PVI), Liberty, PVI, BIC, PTI |
 | Property | Coming soon | |
 | Vehicle | Coming soon | |
+
+Travel and health follow the same journey: needs analysis, side-by-side comparison, the carrier's own application prefilled from the customer's answers, signing, team review before anything reaches the carrier, and case tracking. Health asks for more (insured persons, medical declarations), so its application has more steps. Where a carrier's form is not yet available for online self-service, the Insurnao team completes the application with the customer.
 
 - **Phone-first onboarding.** Sign up and log in with a phone number and one-time code.
 - **Carrier-authoritative applications.** Needs-analysis answers prefill the carrier's own application, field for field. The experience is redesigned; the carrier's form never is.
