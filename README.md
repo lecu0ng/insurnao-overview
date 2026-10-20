@@ -52,7 +52,8 @@ Travel and health follow the same journey: needs analysis, side-by-side comparis
 - **Phone-first onboarding.** Sign up and log in with a phone number and one-time code.
 - **Carrier-authoritative applications.** Needs-analysis answers prefill the carrier's own application, field for field. The experience is redesigned; the carrier's form never is.
 - **Iris.** A grounded EN/VI assistant with citations, deterministic guardrails and a privacy gateway.
-- **Ops console.** Lead funnel, case management with a human-approval gate before anything reaches a carrier, document review and agent management.
+- **Ops console.** One place to run the agency: a daily to-do list, case management with a human-approval gate before anything reaches a carrier, payment-proof checks (customers always pay the insurer directly), renewals, the insurer address book, website enquiries, privacy requests, team invites, a live insights dashboard and a built-in user manual. Reachable only on a private network, with a passkey per person, and every sensitive action is logged.
+- **AI email assistant.** Reads Insurnao's mailboxes and leaves a suggested reply in each mailbox's drafts, in the sender's language. It never sends: a person reviews, edits and sends every reply from the ops email manager. Personal details are replaced with placeholders before any text reaches the AI model, and sensitive emails (health, data requests, complaints) never reach it at all.
 
 ---
 
@@ -65,6 +66,7 @@ Travel and health follow the same journey: needs analysis, side-by-side comparis
 | Aug 2026 | Supply-chain security controls and CI on every change |
 | Sep 2026 | Iris knowledge base expanded to 270 source documents across travel, health and regulation |
 | Oct 2026 | Iris on Claude Haiku 5.5 after a blind 12-model benchmark; first-party analytics in Vietnam |
+| 20 Oct 2026 | Soft launch at insurnao.ai; ops console reorganised, live insights dashboard, anonymous crash tracking, AI email assistant and ops email manager, public status page |
 | Oct to Nov 2026 | Quiet beta |
 | **9 Nov 2026** | **Public launch** at [insurnao.ai](https://insurnao.ai) |
 
@@ -82,6 +84,9 @@ flowchart LR
   W --> DB[("PostgreSQL + pgvector<br/>in Vietnam")]
   I --> M["Claude Haiku 5.5<br/>with fallback providers"]
   W --> A[("First-party analytics<br/>in Vietnam")]
+  OPS["Ops console<br/>private network, passkeys"] --> W
+  MA["Email assistant<br/>reply drafts only"] --> MB["Insurnao mailboxes"]
+  OPS -->|"review and send"| MB
 ```
 
 - Everything that touches personal data runs in Vietnam. Questions to Iris that contain personal data never leave the country verbatim.
@@ -106,7 +111,7 @@ flowchart LR
 | Hosting | Docker Compose on GreenNode (VNG Cloud), Ho Chi Minh City |
 | Delivery | GitHub Actions, GitHub Container Registry |
 | Security tooling | Semgrep, Gitleaks, Trivy, OSV-Scanner, Dependabot |
-| Monitoring | Uptime Kuma, self-hosted ntfy |
+| Monitoring | Uptime Kuma with a public status page ([status.insurnao.ai](https://status.insurnao.ai)), self-hosted ntfy alerts, live in-house insights dashboard |
 | Planned | Metabase (BI), GrowthBook (experiments), Langfuse (LLM tracing), DuckDB and scikit-learn / LightGBM (ML recommender) |
 
 ---
@@ -134,16 +139,16 @@ Iris answers questions about insurance, Vietnamese insurance regulation, product
 
 ## Security, privacy and quality
 
-- **Compliance:** built for Vietnam's PDPL (Law 91/2025/QH15) and Decree 356/2025: data residency in Vietnam, consent before analytics, pseudonymous product data, enforced retention.
+- **Compliance:** built for Vietnam's PDPL (Law 91/2025/QH15) and Decree 356/2025: data residency in Vietnam, consent before analytics, pseudonymous product data, enforced retention. Visitors who decline analytics are only counted anonymously; browser crashes are counted for everyone the same anonymous way, with no personal data.
 - **Security engineering:** static analysis, secret scanning, dependency and container scanning on every change; supply-chain controls on every dependency; security gates before any code reaches production.
-- **Quality:** about 280 automated test suites (quote engine, recommender, Iris, applications, e-signature, analytics, database), plus document-processing fail-safe tests and real-database migration replays in CI.
-- **Operations:** encrypted in-country backups with regular restore drills, uptime monitoring and alerting.
+- **Quality:** about 290 automated test suites (quote engine, recommender, Iris, applications, e-signature, analytics, database), plus document-processing fail-safe tests and real-database migration replays in CI.
+- **Operations:** encrypted in-country backups with regular restore drills, minute-by-minute uptime checks on a [public status page](https://status.insurnao.ai), crash alerts and a live insights dashboard.
 
 ---
 
 ## Roadmap
 
-**Done:** travel and health journeys end to end · in-country production · Iris with privacy gateway and nightly evaluation · first-party analytics in Vietnam
+**Done:** travel and health journeys end to end · in-country production · Iris with privacy gateway and nightly evaluation · first-party analytics in Vietnam · soft launch · ops console and live insights · AI email assistant with human review
 
 **Next:** quiet beta, then public launch on 9 November 2026
 
@@ -156,7 +161,7 @@ Iris answers questions about insurance, Vietnamese insurance regulation, product
 - Insurnao does not underwrite. Carriers decide.
 - The AI never sets a price.
 - Carrier data is recorded exactly as published.
-- Nothing is sent to a carrier without human approval.
+- Nothing is sent to a carrier without human approval, and AI-drafted emails are always reviewed by a person before sending.
 - Personal data stays in Vietnam.
 
 ---
