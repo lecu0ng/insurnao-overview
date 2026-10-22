@@ -10,7 +10,7 @@ Needs analysis, cross-carrier comparison, the carrier's own application form and
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17%20%2B%20pgvector-4169E1?logo=postgresql&logoColor=white)
-![AI](https://img.shields.io/badge/AI-Claude%20Haiku%205.5-D97757)
+![AI](https://img.shields.io/badge/AI-Claude%20Haiku%20%26%20Sonnet%205.5-D97757)
 
 [insurnao.ai](https://insurnao.ai) · Public launch **9 November 2026**
 
@@ -51,9 +51,11 @@ Travel and health follow the same journey: needs analysis, side-by-side comparis
 
 - **Phone-first onboarding.** Sign up and log in with a phone number and one-time code.
 - **Carrier-authoritative applications.** Needs-analysis answers prefill the carrier's own application, field for field. The experience is redesigned; the carrier's form never is.
-- **Iris.** A grounded EN/VI assistant with citations, deterministic guardrails and a privacy gateway.
-- **Ops console.** One place to run the agency: a daily to-do list, case management with a human-approval gate before anything reaches a carrier, payment-proof checks (customers always pay the insurer directly), renewals, the insurer address book, website enquiries, privacy requests, team invites, a live insights dashboard and a built-in user manual. Reachable only on a private network, with a passkey per person, and every sensitive action is logged.
-- **AI email assistant.** Reads Insurnao's mailboxes and leaves a suggested reply in each mailbox's drafts, in the sender's language. It never sends: a person reviews, edits and sends every reply from the ops email manager. Personal details are replaced with placeholders before any text reaches the AI model, and sensitive emails (health, data requests, complaints) never reach it at all.
+- **Iris.** A grounded EN/VI assistant with citations, deterministic guardrails and a privacy gateway. Iris also gives each application a quick check before the insurer's form is prepared.
+- **Upload, onshore scanner and human review.** The signed application is uploaded with recorded consent, checked by a scanner that runs in Vietnam (answers, pages, signature, text recognition for scans), then reviewed by a person before anything reaches the insurer. See [From application to insurer](#from-application-to-insurer).
+- **Stage emails and alerts.** Customers get a short email at each stage from Insurnao's own mailbox in Vietnam, with no insurance details in it. The team gets a phone alert and an email when an application arrives.
+- **Ops console.** One place to run the agency: a daily to-do list, case management with the application review (every original beside the scanner's findings) and a human-approval gate before anything reaches a carrier, an email manager for every mailbox, payment-proof checks (customers always pay the insurer directly), renewals, the insurer address book, website enquiries, privacy requests, team invites, a live insights dashboard and a built-in user manual. Reachable only on a private network, with a passkey per person, and every sensitive action is logged.
+- **AI email assistant.** Reads Insurnao's mailboxes and, with Claude Sonnet 5.5, works out what each sender is asking and leaves a suggested reply in the mailbox's drafts, in the sender's language, answered from Iris's verified product facts. It never sends: a person reviews, edits and sends every reply from the ops email manager. Personal details are replaced with placeholders before any text reaches the AI model, and sensitive emails (health, data requests, complaints) never reach it at all.
 
 ---
 
@@ -67,6 +69,7 @@ Travel and health follow the same journey: needs analysis, side-by-side comparis
 | Sep 2026 | Iris knowledge base expanded to 270 source documents across travel, health and regulation |
 | Oct 2026 | Iris on Claude Haiku 5.5 after a blind 12-model benchmark; first-party analytics in Vietnam |
 | 20 Oct 2026 | Soft launch at insurnao.ai; ops console reorganised, live insights dashboard, anonymous crash tracking, AI email assistant and ops email manager, public status page |
+| 22 Oct 2026 | Live end-to-end test runs on the production site with synthetic customers: application upload, onshore scanner, team review, correction loop, send to insurer, every email, and six browser profiles |
 | Oct to Nov 2026 | Quiet beta |
 | **9 Nov 2026** | **Public launch** at [insurnao.ai](https://insurnao.ai) |
 
@@ -81,6 +84,9 @@ flowchart LR
   W --> Q["Quote engine<br/>deterministic pricing<br/>and recommendations"]
   W --> I["Iris<br/>guardrails, privacy gateway,<br/>grounded retrieval"]
   W --> D["Document service<br/>carrier PDF forms,<br/>local OCR, e-signature"]
+  W --> SC["Onshore scanner<br/>answers, pages,<br/>signature presence"]
+  SC --> D
+  W --> N["Stage emails and<br/>ops alerts, in Vietnam"]
   W --> DB[("PostgreSQL + pgvector<br/>in Vietnam")]
   I --> M["Claude Haiku 5.5<br/>with fallback providers"]
   W --> A[("First-party analytics<br/>in Vietnam")]
@@ -91,6 +97,21 @@ flowchart LR
 
 - Everything that touches personal data runs in Vietnam. Questions to Iris that contain personal data never leave the country verbatim.
 - Containerised services, images pinned by digest, health-gated deploys with automatic rollback.
+
+---
+
+## From application to insurer
+
+What happens after a customer picks a plan. Every step runs in Vietnam, and none of them decides on cover: the insurer does.
+
+1. **Details and a quick check.** Answers from the needs analysis prefill the application. Simple rules, and for travel a privacy-light AI check that sees only ages, countries and yes/no flags (never names or ID numbers), point out anything that looks off.
+2. **The insurer's own form.** It is filled in on our servers and shown page by page in the browser, so the customer sees exactly what the insurer will receive, then signs it.
+3. **Consent, then upload.** Two recorded steps: permission to collect the application, then permission for this exact application to go to the chosen insurer. Uploads are resumable, each file is fingerprinted, and files that are not what they claim to be (a renamed file, a password-protected PDF) are turned away with a plain explanation.
+4. **The onshore scanner.** Right after submission it compares every answer with the confirmed details, checks that every page is there, looks for ink on the insurer's signature line (presence only, never authenticity) and reads scans with local text recognition in English and Vietnamese. Photos are always marked for a person to compare. Its findings are suggestions, never decisions.
+5. **A person reviews every original.** The team confirms or corrects each finding. Overriding a scanner warning needs a written reason. If anything needs fixing, the customer is emailed and uploads a corrected copy.
+6. **Sent by a person.** Only after a full review, only to an address in that insurer's address book, with a short checklist and a record of exactly what was sent.
+
+On 22 October 2026 this whole path was run live with synthetic customers, including ten deliberately altered uploads (unsigned, name changed, dates extended, a page missing, plan switched, another application's form, a photo, a renamed text file, a password-protected PDF). The scanner and the review caught them, the correction loop and every customer email worked, and the journey passed in Edge, Chrome, Firefox, Safari and two iPhone sizes, signed in and as a guest. The few gaps it found were fixed the same day.
 
 ---
 
@@ -105,13 +126,15 @@ flowchart LR
 | Data | PostgreSQL 17 + pgvector, Drizzle ORM |
 | Cache and counters | Redis 7 |
 | Auth | Phone OTP sessions; WebAuthn passkeys for operations |
-| Documents | pdf-lib (TypeScript); pypdf, ReportLab, OpenCV, Tesseract (Python) |
-| AI | Anthropic Claude Haiku 5.5 with prompt caching; OpenRouter fallback restricted to no-data-retention providers |
+| Documents | pdf-lib (TypeScript); PDF.js for in-browser previews; pypdf, ReportLab, OpenCV, Poppler, Tesseract in English and Vietnamese (Python) for form filling, text recognition, page checks and the signature check |
+| AI | Anthropic Claude Haiku 5.5 with prompt caching for Iris and the application check; Claude Sonnet 5.5 for the email assistant and for grading Iris's nightly tests; OpenRouter fallback restricted to no-data-retention providers |
+| Email | Our own mail host for every mailbox, customer stage emails and team alerts; IMAP for the email assistant and ops email manager |
 | Edge | Caddy |
 | Hosting | Docker Compose on GreenNode (VNG Cloud), Ho Chi Minh City |
 | Delivery | GitHub Actions, GitHub Container Registry |
 | Security tooling | Semgrep, Gitleaks, Trivy, OSV-Scanner, Dependabot |
 | Monitoring | Uptime Kuma with a public status page ([status.insurnao.ai](https://status.insurnao.ai)), self-hosted ntfy alerts, live in-house insights dashboard |
+| Testing | About 310 automated test suites; Playwright for live journeys in Edge, Chrome, Firefox, Safari (WebKit) and iPhone profiles |
 | Planned | Metabase (BI), GrowthBook (experiments), Langfuse (LLM tracing), DuckDB and scikit-learn / LightGBM (ML recommender) |
 
 ---
@@ -141,14 +164,14 @@ Iris answers questions about insurance, Vietnamese insurance regulation, product
 
 - **Compliance:** built for Vietnam's PDPL (Law 91/2025/QH15) and Decree 356/2025: data residency in Vietnam, consent before analytics, pseudonymous product data, enforced retention. Visitors who decline analytics are only counted anonymously; browser crashes are counted for everyone the same anonymous way, with no personal data.
 - **Security engineering:** static analysis, secret scanning, dependency and container scanning on every change; supply-chain controls on every dependency; security gates before any code reaches production.
-- **Quality:** about 290 automated test suites (quote engine, recommender, Iris, applications, e-signature, analytics, database), plus document-processing fail-safe tests and real-database migration replays in CI.
+- **Quality:** about 310 automated test suites (quote engine, recommender, Iris, applications, upload and scanner, e-signature, emails, analytics, database), plus document-processing fail-safe tests, real-database migration replays in CI, and live end-to-end runs on the production site with synthetic customers.
 - **Operations:** encrypted in-country backups with regular restore drills, minute-by-minute uptime checks on a [public status page](https://status.insurnao.ai), crash alerts and a live insights dashboard.
 
 ---
 
 ## Roadmap
 
-**Done:** travel and health journeys end to end · in-country production · Iris with privacy gateway and nightly evaluation · first-party analytics in Vietnam · soft launch · ops console and live insights · AI email assistant with human review
+**Done:** travel and health journeys end to end · in-country production · Iris with privacy gateway and nightly evaluation · first-party analytics in Vietnam · soft launch · ops console and live insights · AI email assistant with human review · application upload with onshore scanner, team review and send gate · stage emails and team alerts · live end-to-end runs across browsers
 
 **Next:** quiet beta, then public launch on 9 November 2026
 
@@ -160,6 +183,7 @@ Iris answers questions about insurance, Vietnamese insurance regulation, product
 
 - Insurnao does not underwrite. Carriers decide.
 - The AI never sets a price.
+- Machines suggest; people decide. Scanner and AI findings are always checked by a person.
 - Carrier data is recorded exactly as published.
 - Nothing is sent to a carrier without human approval, and AI-drafted emails are always reviewed by a person before sending.
 - Personal data stays in Vietnam.
