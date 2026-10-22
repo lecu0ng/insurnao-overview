@@ -12,7 +12,7 @@ Needs analysis, cross-carrier comparison, the carrier's own application form and
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17%20%2B%20pgvector-4169E1?logo=postgresql&logoColor=white)
 ![AI](https://img.shields.io/badge/AI-Claude%20Haiku%20%26%20Sonnet%205.5-D97757)
 
-[insurnao.ai](https://insurnao.ai) · Public launch **9 November 2026**
+[insurnao.ai](https://insurnao.ai) · Public launch **November 2026**
 
 </div>
 
@@ -68,10 +68,10 @@ Travel and health follow the same journey: needs analysis, side-by-side comparis
 | Aug 2026 | Supply-chain security controls and CI on every change |
 | Sep 2026 | Iris knowledge base expanded to 270 source documents across travel, health and regulation |
 | Oct 2026 | Iris on Claude Haiku 5.5 after a blind 12-model benchmark; first-party analytics in Vietnam |
-| 20 Oct 2026 | Soft launch at insurnao.ai; ops console reorganised, live insights dashboard, anonymous crash tracking, AI email assistant and ops email manager, public status page |
+| Oct 2026 | Soft launch at insurnao.ai; ops console reorganised, live insights dashboard, anonymous crash tracking, AI email assistant and ops email manager, public status page |
 | Oct 2026 | Live end-to-end tests with synthetic customers: application upload, onshore scanner, team review, correction loop, send to insurer, emails, and all major browsers |
 | Oct to Nov 2026 | Quiet beta |
-| **9 Nov 2026** | **Public launch** at [insurnao.ai](https://insurnao.ai) |
+| **Nov 2026** | **Public launch** at [insurnao.ai](https://insurnao.ai) |
 
 ---
 
@@ -173,7 +173,7 @@ Iris answers questions about insurance, Vietnamese insurance regulation, product
 
 **Done:** travel and health journeys end to end · in-country production · Iris with privacy gateway and nightly evaluation · first-party analytics in Vietnam · soft launch · ops console and live insights · AI email assistant with human review · application upload with onshore scanner, team review and send gate · stage emails and team alerts · live end-to-end runs across browsers
 
-**Next:** quiet beta, then public launch on 9 November 2026
+**Next:** quiet beta, then public launch in November 2026
 
 **Planned:** property and vehicle insurance · ML-powered recommendations from real customer outcomes · self-hosted business intelligence · experiments and feature flags
 
