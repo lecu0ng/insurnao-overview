@@ -69,7 +69,7 @@ Travel and health follow the same journey: needs analysis, side-by-side comparis
 | Sep 2026 | Iris knowledge base expanded to 270 source documents across travel, health and regulation |
 | Oct 2026 | Iris on Claude Haiku 5.5 after a blind 12-model benchmark; first-party analytics in Vietnam |
 | 20 Oct 2026 | Soft launch at insurnao.ai; ops console reorganised, live insights dashboard, anonymous crash tracking, AI email assistant and ops email manager, public status page |
-| 22 Oct 2026 | Live end-to-end test runs on the production site with synthetic customers: application upload, onshore scanner, team review, correction loop, send to insurer, every email, and six browser profiles |
+| Oct 2026 | Live end-to-end tests with synthetic customers: application upload, onshore scanner, team review, correction loop, send to insurer, emails, and all major browsers |
 | Oct to Nov 2026 | Quiet beta |
 | **9 Nov 2026** | **Public launch** at [insurnao.ai](https://insurnao.ai) |
 
@@ -111,7 +111,7 @@ What happens after a customer picks a plan. Every step runs in Vietnam, and none
 5. **A person reviews every original.** The team confirms or corrects each finding. Overriding a scanner warning needs a written reason. If anything needs fixing, the customer is emailed and uploads a corrected copy.
 6. **Sent by a person.** Only after a full review, only to an address in that insurer's address book, with a short checklist and a record of exactly what was sent.
 
-On 22 October 2026 this whole path was run live with synthetic customers, including ten deliberately altered uploads (unsigned, name changed, dates extended, a page missing, plan switched, another application's form, a photo, a renamed text file, a password-protected PDF). The scanner and the review caught them, the correction loop and every customer email worked, and the journey passed in Edge, Chrome, Firefox, Safari and two iPhone sizes, signed in and as a guest. The few gaps it found were fixed the same day.
+In October 2026 this whole path was tested live with synthetic customers, including ten deliberately altered uploads (unsigned, name changed, dates extended, a page missing, another application's form, a renamed file and others). The scanner and the review caught them, every customer email arrived, and the journey worked in Edge, Chrome, Firefox, Safari and on iPhone. The gaps it found were fixed.
 
 ---
 
