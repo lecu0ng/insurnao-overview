@@ -8,7 +8,7 @@ Needs analysis, cross-carrier comparison, the carrier's own application form and
 
 ![Hosted in Vietnam](https://img.shields.io/badge/data%20residency-Vietnam-DA251D)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
-![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17%20%2B%20pgvector-4169E1?logo=postgresql&logoColor=white)
 ![AI](https://img.shields.io/badge/AI-Claude%20Haiku%20%26%20Sonnet%205.5-D97757)
 
@@ -70,6 +70,7 @@ Travel and health follow the same journey: needs analysis, side-by-side comparis
 | Oct 2026 | Iris on Claude Haiku 5.5 after a blind 12-model benchmark; first-party analytics in Vietnam |
 | Oct 2026 | Soft launch at insurnao.ai; ops console reorganised, live insights dashboard, anonymous crash tracking, AI email assistant and ops email manager, public status page |
 | Oct 2026 | Live end-to-end tests with synthetic customers: application upload, onshore scanner, team review, correction loop, send to insurer, emails, and all major browsers |
+| Oct 2026 | Security day: platform upgraded to Next.js 16, two independent code security reviews, then a live stress and tamper audit of the whole production system; bot protection on sign-in and onshore bot and crawler controls added |
 | Oct to Nov 2026 | Quiet beta |
 | **Nov 2026** | **Public launch** at [insurnao.ai](https://insurnao.ai) |
 
@@ -79,8 +80,8 @@ Travel and health follow the same journey: needs analysis, side-by-side comparis
 
 ```mermaid
 flowchart LR
-  U["Customer<br/>web, EN / VI"] --> E["Edge<br/>HTTPS, strict security headers"]
-  E --> W["Web app<br/>Next.js 15"]
+  U["Customer<br/>web, EN / VI"] --> E["Edge<br/>HTTPS, strict security headers,<br/>bot and crawler controls"]
+  E --> W["Web app<br/>Next.js 16"]
   W --> Q["Quote engine<br/>deterministic pricing<br/>and recommendations"]
   W --> I["Iris<br/>guardrails, privacy gateway,<br/>grounded retrieval"]
   W --> D["Document service<br/>carrier PDF forms,<br/>local OCR, e-signature"]
@@ -121,7 +122,7 @@ In October 2026 this whole path was tested live with synthetic customers, includ
 | --- | --- |
 | Languages | TypeScript (strict) across the platform; Python for the document service |
 | Monorepo | pnpm workspaces, Turborepo, Biome |
-| Web | Next.js 15 App Router, React 19, Tailwind CSS, next-intl (Vietnamese and English) |
+| Web | Next.js 16 App Router, React 19, Tailwind CSS, next-intl (Vietnamese and English) |
 | Validation | Zod |
 | Data | PostgreSQL 17 + pgvector, Drizzle ORM |
 | Cache and counters | Redis 7 |
@@ -132,9 +133,9 @@ In October 2026 this whole path was tested live with synthetic customers, includ
 | Edge | Caddy |
 | Hosting | Docker Compose on GreenNode (VNG Cloud), Ho Chi Minh City |
 | Delivery | GitHub Actions, GitHub Container Registry |
-| Security tooling | Semgrep, Gitleaks, Trivy, OSV-Scanner, Dependabot |
+| Security tooling | Semgrep, Gitleaks, Trivy, OSV-Scanner, Dependabot; daily advisory watch on everything running in production; bot check on sign-in |
 | Monitoring | Uptime Kuma with a public status page ([status.insurnao.ai](https://status.insurnao.ai)), self-hosted ntfy alerts, live in-house insights dashboard |
-| Testing | About 310 automated test suites; Playwright for live journeys in Edge, Chrome, Firefox, Safari (WebKit) and iPhone profiles |
+| Testing | More than 320 automated test suites; Playwright for live journeys in Edge, Chrome, Firefox, Safari (WebKit) and iPhone profiles |
 | Planned | Metabase (BI), GrowthBook (experiments), Langfuse (LLM tracing), DuckDB and scikit-learn / LightGBM (ML recommender) |
 
 ---
@@ -148,6 +149,7 @@ Iris answers questions about insurance, Vietnamese insurance regulation, product
 - **Private:** a privacy gateway keeps personal data in Vietnam.
 - **Cost-governed:** hard daily spend limits and abuse protection are built in.
 - **Continuously evaluated:** a 5,600-question adversarial bank in English and Vietnamese (tricky questions, prompt injection, multi-turn traps) is answered and graded every night by an independent AI judge, and every failure becomes a lesson. In a blind benchmark of 12 models, Claude Haiku 5.5 scored highest, with zero critical failures.
+- **Re-tested after every security change:** in October 2026 Iris was re-tested live under the new security settings with a fresh set of questions. The weak spots it found (questions where privacy protection left too little context, and answers in the wrong language) were fixed in the engine, not patched case by case, and the nightly evaluation now runs inside its own fixed monthly budget.
 
 ---
 
@@ -163,15 +165,18 @@ Iris answers questions about insurance, Vietnamese insurance regulation, product
 ## Security, privacy and quality
 
 - **Compliance:** built for Vietnam's PDPL (Law 91/2025/QH15) and Decree 356/2025: data residency in Vietnam, consent before analytics, pseudonymous product data, enforced retention. Visitors who decline analytics are only counted anonymously; browser crashes are counted for everyone the same anonymous way, with no personal data.
-- **Security engineering:** static analysis, secret scanning, dependency and container scanning on every change; supply-chain controls on every dependency; security gates before any code reaches production.
-- **Quality:** about 310 automated test suites (quote engine, recommender, Iris, applications, upload and scanner, e-signature, emails, analytics, database), plus document-processing fail-safe tests, real-database migration replays in CI, and live end-to-end runs on the production site with synthetic customers.
-- **Operations:** encrypted in-country backups with regular restore drills, minute-by-minute uptime checks on a [public status page](https://status.insurnao.ai), crash alerts and a live insights dashboard.
+- **Security engineering:** static analysis, secret scanning, dependency and container scanning on every change; supply-chain controls on every dependency, with a short review delay on new releases and a fast lane for urgent security fixes; security gates before any code reaches production.
+- **Zero-day readiness:** a daily check of every component actually running in production against public security advisories, with an alert to the team when a fix is available; automatic operating-system security updates; production services may only connect out to approved destinations, so a compromised component cannot send data elsewhere.
+- **Bots and scrapers:** a privacy-friendly bot check on sign-in, AI training crawlers refused, and abusive automated traffic detected and blocked on our own server in Vietnam. We deliberately do not route visitors through a foreign proxy, so visitor data stays in the country.
+- **Clean numbers:** our own tests and synthetic customers are kept out of analytics and the insights dashboard, so reported traffic and conversion reflect real people.
+- **Quality:** more than 320 automated test suites (quote engine, recommender, Iris, applications, upload and scanner, e-signature, emails, analytics, database), plus document-processing fail-safe tests, real-database migration replays in CI, and live end-to-end runs on the production site with synthetic customers.
+- **Operations:** encrypted in-country backups with regular restore drills, access logs kept for 14 days for incident review, minute-by-minute uptime checks on a [public status page](https://status.insurnao.ai), crash alerts and a live insights dashboard.
 
 ---
 
 ## Roadmap
 
-**Done:** travel and health journeys end to end · in-country production · Iris with privacy gateway and nightly evaluation · first-party analytics in Vietnam · soft launch · ops console and live insights · AI email assistant with human review · application upload with onshore scanner, team review and send gate · stage emails and team alerts · live end-to-end runs across browsers
+**Done:** travel and health journeys end to end · in-country production · Iris with privacy gateway and nightly evaluation · first-party analytics in Vietnam · soft launch · ops console and live insights · AI email assistant with human review · application upload with onshore scanner, team review and send gate · stage emails and team alerts · live end-to-end runs across browsers · Next.js 16 and a full security day with a live stress and tamper audit · bot protection and onshore crawler controls · daily advisory watch
 
 **Next:** quiet beta, then public launch in November 2026
 
