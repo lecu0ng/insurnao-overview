@@ -2,7 +2,7 @@
 
 # Insurnao
 
-**A licensed insurance agency performing brokerage services (VSIC 6622), powered by AI, for Vietnam: travel and health insurance today (property and vehicle coming soon).**
+**A licensed insurance agency performing brokerage services (VSIC 6622), powered by AI, for Vietnam: travel, health, vehicle and property insurance.**
 
 Needs analysis, cross-carrier comparison, the carrier's own application form and e-signature in one bilingual journey, guided by **Iris**, an AI assistant that explains cover in plain language, cites its sources and never sets a price.
 
@@ -10,9 +10,9 @@ Needs analysis, cross-carrier comparison, the carrier's own application form and
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17%20%2B%20pgvector-4169E1?logo=postgresql&logoColor=white)
-![AI](https://img.shields.io/badge/AI-Claude%20Haiku%20%26%20Sonnet%205.5-D97757)
+![AI](https://img.shields.io/badge/AI-Claude%205.5-D97757)
 
-[insurnao.ai](https://insurnao.ai) · Public launch **November 2026**
+[insurnao.ai](https://insurnao.ai) · Soft launch since **9 Nov 2026** · Official launch date to be announced
 
 </div>
 
@@ -22,7 +22,7 @@ Needs analysis, cross-carrier comparison, the carrier's own application form and
 
 ## Why Insurnao
 
-**The problem.** Buying travel or health insurance in Vietnam is still a paper-and-PDF exercise. Plans are spread across carrier brochures, benefit schedules and policy wordings in mixed languages; international plans are priced in USD; applications are carrier-specific forms that customers fill in by hand and sign in ink. Comparing like for like across carriers is slow, and plain-language advice is hard to find at the moment of decision.
+**The problem.** Buying insurance in Vietnam is still a paper-and-PDF exercise. Plans are spread across carrier brochures, benefit schedules and policy wordings in mixed languages; international plans are priced in USD; applications are carrier-specific forms that customers fill in by hand and sign in ink. Comparing like for like across carriers is slow, and plain-language advice is hard to find at the moment of decision.
 
 **What Insurnao does.** One guided journey: a short needs analysis, a ranked comparison of real plans from established carriers, and the carrier's own application form prefilled from the customer's answers, checked, e-signed and handed to the carrier. Iris answers questions along the way, in English or Vietnamese, with citations to the carrier's own documents.
 
@@ -42,12 +42,14 @@ Needs analysis, cross-carrier comparison, the carrier's own application form and
 
 | Line of business | Status | Carriers |
 | --- | --- | --- |
-| Travel | **Live**: quote, compare, apply, e-sign, track (single trip and annual, domestic and international) | PVI, BIC, PTI, PJICO, Liberty, Pacific Cross International |
-| Health | **Live**: quote, compare, apply, e-sign, track (international and local plans, individuals and families) | Pacific Cross International, Allianz Care, April (via PVI), Liberty, PVI, BIC, PTI |
-| Property | Coming soon | |
-| Vehicle | Coming soon | |
+| Travel | **Live**: quote, compare, apply, e-sign, track (single trip and annual, domestic and international) | PVI, BIC, PTI, PJICO, Chubb, Pacific Cross International |
+| Health | **Live**: quote, compare, apply, e-sign, track (international and local plans, individuals and families) | Pacific Cross International, Allianz Care, April (via PVI), Chubb, PVI, BIC, PTI, PJICO |
+| Vehicle | **Live since 5 Nov 2026**: compulsory third-party liability, car damage and motorbike cover | PVI, BIC, PTI, PJICO, Chubb |
+| Property | **Live since 5 Nov 2026**: home and landlord cover | PJICO, PVI, Chubb |
 
-Travel and health follow the same journey: needs analysis, side-by-side comparison, the carrier's own application prefilled from the customer's answers, signing, team review before anything reaches the carrier, and case tracking. Health asks for more (insured persons, medical declarations), so its application has more steps. Where a carrier's form is not yet available for online self-service, the Insurnao team completes the application with the customer.
+Chubb was formerly Liberty in Vietnam. Not every carrier offers every product; plans we cannot yet price exactly are never quoted from a guess, and the team helps instead.
+
+Every line follows the same journey: needs analysis, side-by-side comparison, the carrier's own application prefilled from the customer's answers, signing, team review before anything reaches the carrier, and case tracking. Health asks for more (insured persons, medical declarations), and vehicle and property ask about the car, motorbike or home, so their applications have more steps. Where a carrier's form is not yet available for online self-service, the Insurnao team completes the application with the customer.
 
 - **Phone-first onboarding.** Sign up and log in with a phone number and one-time code.
 - **Carrier-authoritative applications.** Needs-analysis answers prefill the carrier's own application, field for field. The experience is redesigned; the carrier's form never is.
@@ -56,6 +58,7 @@ Travel and health follow the same journey: needs analysis, side-by-side comparis
 - **Stage emails and alerts.** Customers get a short email at each stage from Insurnao's own mailbox in Vietnam, with no insurance details in it. The team gets a phone alert and an email when an application arrives.
 - **Ops console.** One place to run the agency: a daily to-do list, case management with the application review (every original beside the scanner's findings) and a human-approval gate before anything reaches a carrier, an email manager for every mailbox, payment-proof checks (customers always pay the insurer directly), renewals, the insurer address book, website enquiries, privacy requests, team invites, a live insights dashboard and a built-in user manual. Reachable only on a private network, with a passkey per person, and every sensitive action is logged.
 - **AI email assistant.** Reads Insurnao's mailboxes and, with Claude Sonnet 5.5, works out what each sender is asking and leaves a suggested reply in the mailbox's drafts, in the sender's language, answered from Iris's verified product facts. It never sends: a person reviews, edits and sends every reply from the ops email manager. Personal details are replaced with placeholders before any text reaches the AI model, and sensitive emails (health, data requests, complaints) never reach it at all.
+- **Ops agent.** An AI agent built on Claude Managed Agents that looks into server alerts and sends the team a short report: what happened, the impact, what it did and what needs a person. It works only through a small set of read-only tools and a few named safe fixes, personal data is scrubbed before anything reaches the model, and its memory stays signed on our own server in Vietnam.
 
 ---
 
@@ -67,12 +70,9 @@ Travel and health follow the same journey: needs analysis, side-by-side comparis
 | Jul 2026 | Full platform moved in-country to GreenNode in Ho Chi Minh City |
 | Aug 2026 | Supply-chain security controls and CI on every change |
 | Sep 2026 | Iris knowledge base expanded to 270 source documents across travel, health and regulation |
-| Oct 2026 | Iris on Claude Haiku 5.5 after a blind 12-model benchmark; first-party analytics in Vietnam |
-| Oct 2026 | Soft launch at insurnao.ai; ops console reorganised, live insights dashboard, anonymous crash tracking, AI email assistant and ops email manager, public status page |
-| Oct 2026 | Live end-to-end tests with synthetic customers: application upload, onshore scanner, team review, correction loop, send to insurer, emails, and all major browsers |
-| Oct 2026 | Security day: platform upgraded to Next.js 16, two independent code security reviews, then a live stress and tamper audit of the whole production system; bot protection on sign-in and onshore bot and crawler controls added |
-| Oct to Nov 2026 | Quiet beta |
-| **Nov 2026** | **Public launch** at [insurnao.ai](https://insurnao.ai) |
+| Oct 2026 | **Beta testing from 20 Oct**, **invites to a small group and friends & family from 23 Oct**. Iris on Claude Haiku 5.5 after a blind 12-model benchmark; first-party analytics in Vietnam; ops console reorganised, live insights dashboard, AI email assistant and ops email manager, public status page; live end-to-end tests with synthetic customers across all major browsers; **security day**: Next.js 16, two independent code security reviews and a live stress and tamper audit |
+| Nov 2026 | **Vehicle and property live (5 Nov)**; more health plans from April and Chubb; Iris knowledge base grown to more than 440 documents; **soft launch at [insurnao.ai](https://insurnao.ai) (9 Nov)**: open to everyone, still testing; AI ops agent for server alerts |
+| Next | Official launch, date to be announced |
 
 ---
 
@@ -128,14 +128,14 @@ In October 2026 this whole path was tested live with synthetic customers, includ
 | Cache and counters | Redis 7 |
 | Auth | Phone OTP sessions; WebAuthn passkeys for operations |
 | Documents | pdf-lib (TypeScript); PDF.js for in-browser previews; pypdf, ReportLab, OpenCV, Poppler, Tesseract in English and Vietnamese (Python) for form filling, text recognition, page checks and the signature check |
-| AI | Anthropic Claude Haiku 5.5 with prompt caching for Iris and the application check; Claude Sonnet 5.5 for the email assistant and for grading Iris's nightly tests; OpenRouter fallback restricted to no-data-retention providers |
+| AI | Anthropic Claude Haiku 5.5 with prompt caching for Iris and the application check; Claude Sonnet 5.5 for the email assistant and for grading Iris's nightly tests; Claude Opus 5.5 on Claude Managed Agents for the ops agent; OpenRouter fallback restricted to no-data-retention providers |
 | Email | Our own mail host for every mailbox, customer stage emails and team alerts; IMAP for the email assistant and ops email manager |
 | Edge | Caddy |
 | Hosting | Docker Compose on GreenNode (VNG Cloud), Ho Chi Minh City |
 | Delivery | GitHub Actions, GitHub Container Registry |
 | Security tooling | Semgrep, Gitleaks, Trivy, OSV-Scanner, Dependabot; daily advisory watch on everything running in production; bot check on sign-in |
 | Monitoring | Uptime Kuma with a public status page ([status.insurnao.ai](https://status.insurnao.ai)), self-hosted ntfy alerts, live in-house insights dashboard |
-| Testing | More than 320 automated test suites; Playwright for live journeys in Edge, Chrome, Firefox, Safari (WebKit) and iPhone profiles |
+| Testing | More than 380 automated test suites; Playwright for live journeys in Edge, Chrome, Firefox, Safari (WebKit) and iPhone profiles |
 | Planned | Metabase (BI), GrowthBook (experiments), Langfuse (LLM tracing), DuckDB and scikit-learn / LightGBM (ML recommender) |
 
 ---
@@ -144,7 +144,7 @@ In October 2026 this whole path was tested live with synthetic customers, includ
 
 Iris answers questions about insurance, Vietnamese insurance regulation, products, the buying journey and troubleshooting, in English and Vietnamese.
 
-- **Grounded:** answers come from a verified knowledge base of carrier and regulatory documents, with citations.
+- **Grounded:** answers come from a verified knowledge base of more than 440 carrier and regulatory documents across travel, health, vehicle and property, with citations.
 - **Guardrailed:** deterministic rules run before and after every model call; Iris never makes underwriting decisions, guarantees prices or gives personal legal or financial advice.
 - **Private:** a privacy gateway keeps personal data in Vietnam.
 - **Cost-governed:** hard daily spend limits and abuse protection are built in.
@@ -158,6 +158,7 @@ Iris answers questions about insurance, Vietnamese insurance regulation, product
 - **Every price is deterministic.** No AI writes, edits or rounds a premium.
 - **Verified against carriers.** Rate tables are cross-checked against carriers' own calculators (for example, 32 of 32 cases matched exactly for one international health product) and swept across more than 1,600 travel and health combinations.
 - **Explainable.** Every recommendation records why it was made, and later what the customer chose.
+- **Vehicle and property:** compulsory motor cover follows the statutory tariff; other premiums come from each insurer's dated tariff, checked against insurer portals where one exists.
 - **VND first.** USD-priced plans convert at the Vietcombank sell rate at quote time.
 
 ---
@@ -169,18 +170,18 @@ Iris answers questions about insurance, Vietnamese insurance regulation, product
 - **Zero-day readiness:** a daily check of every component actually running in production against public security advisories, with an alert to the team when a fix is available; automatic operating-system security updates; production services may only connect out to approved destinations, so a compromised component cannot send data elsewhere.
 - **Bots and scrapers:** a privacy-friendly bot check on sign-in, AI training crawlers refused, and abusive automated traffic detected and blocked on our own server in Vietnam. We deliberately do not route visitors through a foreign proxy, so visitor data stays in the country.
 - **Clean numbers:** our own tests and synthetic customers are kept out of analytics and the insights dashboard, so reported traffic and conversion reflect real people.
-- **Quality:** more than 320 automated test suites (quote engine, recommender, Iris, applications, upload and scanner, e-signature, emails, analytics, database), plus document-processing fail-safe tests, real-database migration replays in CI, and live end-to-end runs on the production site with synthetic customers.
+- **Quality:** more than 380 automated test suites (quote engine, recommender, Iris, applications, upload and scanner, e-signature, emails, analytics, database), plus document-processing fail-safe tests, real-database migration replays in CI, and live end-to-end runs on the production site with synthetic customers.
 - **Operations:** encrypted in-country backups with regular restore drills, access logs kept for 14 days for incident review, minute-by-minute uptime checks on a [public status page](https://status.insurnao.ai), crash alerts and a live insights dashboard.
 
 ---
 
 ## Roadmap
 
-**Done:** travel and health journeys end to end · in-country production · Iris with privacy gateway and nightly evaluation · first-party analytics in Vietnam · soft launch · ops console and live insights · AI email assistant with human review · application upload with onshore scanner, team review and send gate · stage emails and team alerts · live end-to-end runs across browsers · Next.js 16 and a full security day with a live stress and tamper audit · bot protection and onshore crawler controls · daily advisory watch
+**Done:** travel, health, vehicle and property journeys end to end · in-country production · Iris with privacy gateway and nightly evaluation · first-party analytics in Vietnam · beta testing and soft launch · ops console and live insights · AI email assistant with human review · application upload with onshore scanner, team review and send gate · stage emails and team alerts · live end-to-end runs across browsers · Next.js 16 and a full security day with a live stress and tamper audit · bot protection and onshore crawler controls · daily advisory watch · AI ops agent for server alerts
 
-**Next:** quiet beta, then public launch in November 2026
+**Next:** hardening for the official launch (date to be announced) · more vehicle and property products
 
-**Planned:** property and vehicle insurance · ML-powered recommendations from real customer outcomes · self-hosted business intelligence · experiments and feature flags
+**Planned:** ML-powered recommendations from real customer outcomes · self-hosted business intelligence · experiments and feature flags
 
 ---
 
